@@ -1,60 +1,67 @@
 ﻿namespace Day_18_Queues_and_Stacks;
 
 class Solution {
-    Queue<char> queue = new();
-    Stack<char> stack = new();
+    private readonly Queue<char> _queue = new();
+    private readonly Stack<char> _stack = new();
 
-    static void Main(String[] args) {
+    private static void Main() {
         // read the string s.
-        string s = Console.ReadLine();
+        string? s = Console.ReadLine();
         
         // create the Solution class object p.
         Solution obj = new Solution();
         
         // push/enqueue all the characters of string s to stack.
-        foreach (char c in s) {
-            obj.pushCharacter(c);
-            obj.enqueueCharacter(c);
+        if (s == null) return;
+        foreach (char c in s)
+        {
+            obj.PushCharacter(c);
+            obj.EnqueueCharacter(c);
         }
-        
+
         bool isPalindrome = true;
-        
+
         // pop the top character from stack.
         // dequeue the first character from queue.
         // compare both the characters.
-        for (int i = 0; i < s.Length / 2; i++) {
-            if (obj.popCharacter() != obj.dequeueCharacter()) {
+        for (int i = 0; i < s.Length / 2; i++)
+        {
+            if (obj.PopCharacter() != obj.DequeueCharacter())
+            {
                 isPalindrome = false;
-                
+
                 break;
             }
         }
-        
+
         // finally print whether string s is palindrome or not.
-        if (isPalindrome) {
+        if (isPalindrome)
+        {
             Console.Write("The word, {0}, is a palindrome.", s);
-        } else {
+        }
+        else
+        {
             Console.Write("The word, {0}, is not a palindrome.", s);
         }
     }
 
-    private char dequeueCharacter()
+    private char DequeueCharacter()
     {
-        return queue.Dequeue();
+        return _queue.Dequeue();
     }
 
-    private char popCharacter()
+    private char PopCharacter()
     {
-        return stack.Pop();
+        return _stack.Pop();
     }
 
-    private void enqueueCharacter(char c)
+    private void EnqueueCharacter(char c)
     {
-        queue.Enqueue(c);
+        _queue.Enqueue(c);
     }
 
-    private void pushCharacter(char c)
+    private void PushCharacter(char c)
     {
-        stack.Push(c);
+        _stack.Push(c);
     }
 }
